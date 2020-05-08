@@ -2,6 +2,7 @@
     <string name="app_name">AP Centroentrenamiento</string>
     <!--    Login View   -->
     <string name="login_email">Ingresar su correo</string>
+    <string name="login_logout">CERRAR SESIÓN</string>
     <string name="login_password">Ingresar su contraseña</string>
     <string name="login_confirm_password">Confirmar Contraseña</string>
     <string name="login_sign_in">Ingresar</string>
@@ -32,7 +33,6 @@
     <string name="Oscar_Molina">Oscar Molina Piposca</string>
     <string name="Andy_Cerkvenih">Andy Cerkvenih</string>
     <string name="Instagram">p22centrodeentrenamiento</string>
-
 
 
 </resources>
