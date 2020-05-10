@@ -13,7 +13,7 @@
     <string name="login_go_login">Volver al login</string>
     <string name="login_forgot_text">Por Favor Ingresar un Correo para poder recuperar la contraseña.</string>
     <string name="login_sign_in_google">Ingresar con Google</string>
-
+    <string name="prefs_file">com.jparnaudo.apcentro22.PREFERENCE_FILE_KEY</string>
     <!--    Fragment   -->
     <string name="user_name">Arnaudo Juan Pablo</string>
     <string name="user_email">iarnaudojuanpablo@gmail.com</string>
