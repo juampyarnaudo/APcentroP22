@@ -12,107 +12,181 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
         <ImageView
-            android:id="@+id/imageView7"
-            android:layout_width="35dp"
+            android:id="@+id/ivUbicacion"
+            android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginStart="50dp"
-            android:src="@drawable/whatsapp"
-            app:layout_constraintBottom_toBottomOf="@+id/btn_andy"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/ubicacion"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/btn_andy" />
-
-        <Button
-            android:id="@+id/btnPlus"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@color/colorPrimaryDark"
-            android:text="+1"
-            app:layout_constraintBottom_toTopOf="@+id/map"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/ivInstagramGym" />
 
         <ImageView
-            android:id="@+id/imageView6"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_marginStart="50dp"
+            android:id="@+id/ivWhatsappAndy"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
             android:src="@drawable/whatsapp"
-            app:layout_constraintBottom_toBottomOf="@+id/btn_piposca"
+            app:layout_constraintEnd_toStartOf="@+id/ivInstagramAndy"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@+id/guideline8"
+            app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+        <ImageView
+            android:id="@+id/ivWhatsappPiposca"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/whatsapp"
+            app:layout_constraintEnd_toStartOf="@+id/ivInstagramPiposca"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/btn_piposca" />
+            app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
         <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
             android:text="@string/contacto"
             android:textAlignment="center"
-            android:textSize="30sp"
+            android:textColor="@color/white"
+            android:textSize="36sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/btn_piposca"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline7" />
 
         <ImageView
-            android:id="@+id/imageView8"
-            android:layout_width="35dp"
+            android:id="@+id/ivInstagramPiposca"
+            android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginStart="50dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
             android:src="@drawable/instagram"
-            app:layout_constraintBottom_toBottomOf="@+id/btn_instagram"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/btn_instagram" />
+            app:layout_constraintEnd_toStartOf="@+id/guideline8"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/ivWhatsappPiposca"
+            app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
-        <Button
-            android:id="@+id/btn_andy"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/login_Button_xl_height"
-            android:layout_marginBottom="2dp"
-            android:background="@drawable/buttn_ripple_home"
-            android:text="@string/Andy_Cerkvenih"
-            android:textColor="@color/colorSecondaryText"
-            android:textSize="@dimen/login_text_size"
-            app:layout_constraintBottom_toTopOf="@+id/btn_instagram"
+        <ImageView
+            android:id="@+id/ivInstagramAndy"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/instagram"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <Button
-            android:id="@+id/btn_instagram"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/login_Button_xl_height"
-            android:background="@drawable/buttn_ripple_home"
-            android:paddingLeft="30dp"
-            android:text="@string/Instagram"
-            android:textAlignment="center"
-            android:textColor="@color/colorSecondaryText"
-            android:textSize="@dimen/login_text_size"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <Button
-            android:id="@+id/btn_piposca"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/login_Button_xl_height"
-            android:layout_marginBottom="2dp"
-            android:background="@drawable/buttn_ripple_home"
-            android:linksClickable="true"
-            android:text="@string/Oscar_Molina"
-            android:textColor="@color/colorSecondaryText"
-            android:textSize="@dimen/login_text_size"
-            app:layout_constraintBottom_toTopOf="@+id/btn_andy" />
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/ivWhatsappAndy"
+            app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_begin="112dp" />
+            app:layout_constraintGuide_percent="0.25" />
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="3dp"
+            android:src="@drawable/andy"
+            app:layout_constraintBottom_toTopOf="@+id/guideline9"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline8"
+            app:layout_constraintTop_toTopOf="@+id/imageView5" />
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/piposca"
+            app:layout_constraintBottom_toTopOf="@+id/guideline9"
+            app:layout_constraintEnd_toStartOf="@+id/guideline8"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.65" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/Oscar_Molina"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline8"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline9" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/Andy_Cerkvenih"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline9"
+            app:layout_constraintStart_toStartOf="@+id/guideline8"
+            app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+
+        <ImageView
+            android:id="@+id/ivInstagramGym"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/instagram"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="AP Centro de salud P22"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="@+id/ivInstagramGym"
+            app:layout_constraintStart_toEndOf="@+id/ivInstagramGym"
+            app:layout_constraintTop_toTopOf="@+id/ivInstagramGym" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@string/horarios"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/ivUbicacion"
+            app:layout_constraintStart_toEndOf="@+id/ivUbicacion"
+            app:layout_constraintTop_toTopOf="@+id/ivUbicacion" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

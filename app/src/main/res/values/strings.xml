@@ -32,10 +32,11 @@
     <string name="navigation_bottom_contacto">Contacto</string>
     <string name="navigation_bottom_logout">Cerrar sesión</string>
 
-    <string name="contacto">Contacto</string>
+    <string name="contacto">Los Profesores</string>
     <string name="Oscar_Molina">Oscar Molina Piposca</string>
     <string name="Andy_Cerkvenih">Andy Cerkvenih</string>
     <string name="Instagram">p22centrodeentrenamiento</string>
+    <string name="horarios">horarios de 9:00 ~ 12:30 y 14:00 ~ 21:30</string>
 
 
 </resources>

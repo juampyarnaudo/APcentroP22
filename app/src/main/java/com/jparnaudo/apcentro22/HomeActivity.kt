@@ -22,6 +22,7 @@ class HomeActivity : AppCompatActivity(), OnFragmentActionsListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
+        loadFragment(PerfilFragment())
         //Setup
         val bundle = intent.extras
         val email = bundle?.getString("email")
@@ -39,6 +40,9 @@ class HomeActivity : AppCompatActivity(), OnFragmentActionsListener {
 //Carga de fragments
         btnProfile.setOnClickListener { loadFragment(PerfilFragment()) }
         btnContact.setOnClickListener { replaceFragment(ContactoFragment()) }
+        animation_view.setOnClickListener {
+            Toast.makeText(this,"hola",Toast.LENGTH_SHORT).show()
+        }
 
     }
 
