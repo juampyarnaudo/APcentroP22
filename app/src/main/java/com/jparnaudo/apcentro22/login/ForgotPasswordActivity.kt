@@ -15,6 +15,7 @@ class ForgotPasswordActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_forgot_password)
+
         editTextEmail.validate {
             editTextEmail.error = if (isValidEmail(it)) null else "Email no es valido"
         }

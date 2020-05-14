@@ -2,6 +2,7 @@ package com.jparnaudo.apcentro22
 
 import android.content.Context
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -31,6 +32,7 @@ class AuthActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auth)
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 // Agregar analytics de google
         val analytics = FirebaseAnalytics.getInstance(this)
         val bundle = Bundle()
@@ -40,7 +42,8 @@ class AuthActivity : AppCompatActivity() {
         setup()
         session()
 
-        forgotPasswordButton.setOnClickListener { goToActivity<ForgotPasswordActivity>()
+        forgotPasswordButton.setOnClickListener {
+            goToActivity<ForgotPasswordActivity>()
             overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
         }
     }
@@ -102,9 +105,19 @@ class AuthActivity : AppCompatActivity() {
                 .requestEmail()
                 .build()
 
+            val user = FirebaseAuth.getInstance().currentUser
+            user?.let {
+                // Name, email address, and profile photo Url
+                val name = user.displayName
+                val phone = user.phoneNumber
+                val email = user.email
+                val photoUrl = user.photoUrl
+            }
+
             val googleClient = GoogleSignIn.getClient(this, googleConf)
             googleClient.signOut()
             startActivityForResult(googleClient.signInIntent, GOOGLE_SIGN_IN)
+
 
         }
     }
@@ -147,17 +160,18 @@ class AuthActivity : AppCompatActivity() {
                 val account = task.getResult(ApiException::class.java)
                 if (account != null) {
                     val credential = GoogleAuthProvider.getCredential(account.idToken, null)
-                    FirebaseAuth.getInstance().signInWithCredential(credential).addOnCompleteListener {
-                        if (it.isSuccessful) {
-                            showHome(account.email ?: "", ProviderType.GOOGLE)
+                    FirebaseAuth.getInstance().signInWithCredential(credential)
+                        .addOnCompleteListener {
+                            if (it.isSuccessful) {
+                                showHome(account.email ?: "", ProviderType.GOOGLE)
 
-                        } else {
-                            showAlert()
+                            } else {
+                                showAlert()
+                            }
                         }
-                    }
 
                 }
-            }catch (e: ApiException){
+            } catch (e: ApiException) {
                 showAlert()
             }
 

@@ -15,18 +15,18 @@
 
         <ImageView
             android:id="@+id/ivUbicacion"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="24dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_marginTop="16dp"
             android:src="@drawable/ubicacion"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/ivInstagramGym"
+            app:layout_constraintStart_toStartOf="@+id/ivInstagramGym"
             app:layout_constraintTop_toBottomOf="@+id/ivInstagramGym" />
 
         <ImageView
             android:id="@+id/ivWhatsappAndy"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:src="@drawable/whatsapp"
@@ -37,8 +37,8 @@
 
         <ImageView
             android:id="@+id/ivWhatsappPiposca"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:src="@drawable/whatsapp"
@@ -63,8 +63,8 @@
 
         <ImageView
             android:id="@+id/ivInstagramPiposca"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:src="@drawable/instagram"
@@ -75,8 +75,8 @@
 
         <ImageView
             android:id="@+id/ivInstagramAndy"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:src="@drawable/instagram"
@@ -107,7 +107,7 @@
             android:id="@+id/imageView5"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="32dp"
             android:src="@drawable/piposca"
             app:layout_constraintBottom_toTopOf="@+id/guideline9"
             app:layout_constraintEnd_toStartOf="@+id/guideline8"
@@ -155,12 +155,11 @@
 
         <ImageView
             android:id="@+id/ivInstagramGym"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="24dp"
             android:src="@drawable/instagram"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/ivWhatsappPiposca"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -187,6 +186,30 @@
             app:layout_constraintBottom_toBottomOf="@+id/ivUbicacion"
             app:layout_constraintStart_toEndOf="@+id/ivUbicacion"
             app:layout_constraintTop_toTopOf="@+id/ivUbicacion" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/animation_view1"
+            android:layout_width="150dp"
+            android:layout_height="70dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline8"
+            app:layout_constraintStart_toStartOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_fileName="ejercicio.json"
+            app:lottie_loop="true" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/animation_view2"
+            android:layout_width="150dp"
+            android:layout_height="70dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline8"
+            app:lottie_autoPlay="true"
+            app:lottie_fileName="sentadillas2.json"
+            app:lottie_loop="true" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
