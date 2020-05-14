@@ -10,6 +10,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.MobileAds
+import com.google.android.gms.ads.reward.RewardItem
+import com.google.android.gms.ads.reward.RewardedVideoAd
+import com.google.android.gms.ads.reward.RewardedVideoAdListener
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
@@ -19,7 +24,8 @@ import kotlinx.android.synthetic.main.activity_home.view.*
 import kotlinx.android.synthetic.main.fragment_contacto.*
 import kotlinx.android.synthetic.main.fragment_contacto.view.*
 
-class ContactoFragment : Fragment() {
+class ContactoFragment : Fragment(), RewardedVideoAdListener {
+    private lateinit var mRewardedVideoAd: RewardedVideoAd
     private var listener: OnFragmentActionsListener? = null
     private val numberPipos = 5493804535559
     private val numberAndy = 5493804514861
@@ -32,8 +38,10 @@ class ContactoFragment : Fragment() {
     ): View? {
         val view: View = inflater.inflate(R.layout.fragment_contacto, container, false)
         // Inflate the layout for this fragment
-
-
+        MobileAds.initialize(activity, "ca-app-pub-3517612946554837~6240767962")
+        mRewardedVideoAd = MobileAds.getRewardedVideoAdInstance(activity)
+        mRewardedVideoAd.rewardedVideoAdListener = this
+        loadRewardedVideoAd()
 
         view.ivWhatsappPiposca.setOnClickListener { view ->
             val url2 = "https://wa.me/$numberPipos/?text=$textoWhats"
@@ -58,6 +66,18 @@ class ContactoFragment : Fragment() {
             }
 
         }
+
+        view.animation_view1.setOnClickListener {
+            if (mRewardedVideoAd.isLoaded) {
+                mRewardedVideoAd.show()
+            }
+        }
+        view.animation_view2.setOnClickListener {
+            if (mRewardedVideoAd.isLoaded) {
+                mRewardedVideoAd.show()
+            }
+        }
+
 
         view.ivInstagramGym.setOnClickListener { view ->
             val uri = Uri.parse("http://instagram.com/_u/p22centrodeentrenamiento")
@@ -126,6 +146,12 @@ class ContactoFragment : Fragment() {
         }
         return view
     }
+    private fun loadRewardedVideoAd() {
+//        var prueba = "ca-app-pub-3940256099942544/5224354917"
+        var micodigo = "ca-app-pub-3517612946554837/7362277945"
+        mRewardedVideoAd.loadAd(micodigo,
+            AdRequest.Builder().build())
+    }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -143,6 +169,55 @@ class ContactoFragment : Fragment() {
         super.onDetach()
         listener = null
     }
+    override fun onRewarded(reward: RewardItem) {
+        Toast.makeText(activity, "Muchas gracias por tu aporte!",Toast.LENGTH_SHORT).show()
+        // Reward the user.
+    }
+
+    override fun onRewardedVideoAdLeftApplication() {
+//        Toast.makeText(activity, "onRewardedVideoAdLeftApplication", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onRewardedVideoAdClosed() {
+        loadRewardedVideoAd()
+//        Toast.makeText(activity, "onRewardedVideoAdClosed", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onRewardedVideoAdFailedToLoad(errorCode: Int) {
+//        Toast.makeText(activity, "onRewardedVideoAdFailedToLoad", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onRewardedVideoAdLoaded() {
+//        Toast.makeText(activity, "onRewardedVideoAdLoaded", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onRewardedVideoAdOpened() {
+//        Toast.makeText(activity, "onRewardedVideoAdOpened", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onRewardedVideoStarted() {
+//        Toast.makeText(activity, "onRewardedVideoStarted", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onRewardedVideoCompleted() {
+//        Toast.makeText(activity, "onRewardedVideoCompleted", Toast.LENGTH_SHORT).show()
+    }
+    override fun onPause() {
+        super.onPause()
+        mRewardedVideoAd.pause(activity)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mRewardedVideoAd.resume(activity)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mRewardedVideoAd.destroy(activity)
+    }
+
+
 
 
 }
