@@ -37,6 +37,7 @@
     <string name="Andy_Cerkvenih">Andy Cerkvenih</string>
     <string name="Instagram">p22centrodeentrenamiento</string>
     <string name="horarios">horarios de 9:00 ~ 12:30 y 14:00 ~ 21:30</string>
+    <string name="msg_token_fmt">123</string>
 
 
 </resources>

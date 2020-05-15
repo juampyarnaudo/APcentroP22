@@ -30,7 +30,7 @@ class ContactoFragment : Fragment(), RewardedVideoAdListener {
     private val numberPipos = 5493804535559
     private val numberAndy = 5493804514861
     private val textoWhats = "Hola cómo estás? tengo una consulta para hacerte..."
-    private val ubicacionGym = "https://www.google.com/maps/dir/-29.4167112,-66.8533726/Av.+Monse%C3%B1or+E.+Angelelli+1545-1655,+F5300+La+Rioja/@-29.4241319,-66.8589599,15z/data=!3m1!4b1!4m10!4m9!1m1!4e1!1m5!1m1!1s0x9427da29711d59af:0x13df14ee541f563f!2m2!1d-66.8489674!2d-29.4316079!3e2"
+    private val ubicacionGym = "https://goo.gl/maps/XXJ8LAjYt5d4qsyD9"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

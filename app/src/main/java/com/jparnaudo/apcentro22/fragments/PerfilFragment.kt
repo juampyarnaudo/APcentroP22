@@ -19,13 +19,13 @@ import kotlinx.android.synthetic.main.fragment_perfil.view.*
 class PerfilFragment : Fragment() {
 
     private var listener: OnFragmentActionsListener? = null
+//    private lateinit var database: DatabaseReference
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-
         val view: View = inflater.inflate(R.layout.fragment_perfil, container, false)
         val user = FirebaseAuth.getInstance().currentUser
         if (user != null) {
@@ -33,6 +33,9 @@ class PerfilFragment : Fragment() {
             view.etPhone.setText(user.phoneNumber.toString())
             view.ivProfile.setImageURI(user.photoUrl)
         }
+
+
+//        database = FirebaseDatabase.getInstance().reference
 
         view.switchEditar.setOnClickListener {Boolean
             if (switchEditar.isChecked){
