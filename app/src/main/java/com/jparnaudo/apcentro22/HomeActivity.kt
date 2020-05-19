@@ -16,23 +16,20 @@ import com.jparnaudo.apcentro22.fragments.OnFragmentActionsListener
 import com.jparnaudo.apcentro22.fragments.PerfilFragment
 import kotlinx.android.synthetic.main.activity_home.*
 
-enum class ProviderType {
-    BASIC, GOOGLE
-}
-
 class HomeActivity : AppCompatActivity(), OnFragmentActionsListener {
 
-    private val TAG = "Juampy"
+    private val TAG = "P22"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
         loadFragment(PerfilFragment())
         //Setup
         val bundle = intent.extras
         val email = bundle?.getString("email")
         val provider = bundle?.getString("provider")
-        setup(email ?: "", provider ?: "")
+        val nombre = bundle?.getString("nombre")
+        setup(email ?: "", provider ?: "",nombre ?:"")
 
         // guardado de datos
 
@@ -100,8 +97,8 @@ class HomeActivity : AppCompatActivity(), OnFragmentActionsListener {
 
 
 
-    private fun setup(email: String, provider: String) {
-        title = "Inicio"
+    private fun setup(email: String, provider: String, nombre: String) {
+        title = "AP Centro de Entrenamiento P22"
 //        mtvEmail.text = email
 //        mtvProvider.text = provider
 

@@ -11,11 +11,26 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:src="@drawable/logo_chico"
+            app:layout_constraintBottom_toTopOf="@+id/etName"
+            app:layout_constraintEnd_toStartOf="@+id/guideline11"
+            app:layout_constraintStart_toStartOf="@+id/guideline10"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
+
         <EditText
             android:id="@+id/etName"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginBottom="16dp"
             android:ems="10"
             android:enabled="false"
             android:hint="Nombre"
@@ -23,9 +38,9 @@
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
+            app:layout_constraintBottom_toTopOf="@+id/etPhone"
             app:layout_constraintEnd_toStartOf="@+id/guideline11"
-            app:layout_constraintStart_toEndOf="@+id/textView10"
-            app:layout_constraintTop_toBottomOf="@+id/ivProfile" />
+            app:layout_constraintStart_toEndOf="@+id/textView10" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline10"
@@ -45,7 +60,7 @@
             android:id="@+id/etPhone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
             android:ems="10"
             android:enabled="false"
             android:hint="Telefono"
@@ -53,15 +68,15 @@
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
+            app:layout_constraintBottom_toTopOf="@+id/etAge"
             app:layout_constraintEnd_toEndOf="@+id/etName"
-            app:layout_constraintStart_toStartOf="@+id/etName"
-            app:layout_constraintTop_toBottomOf="@+id/etName" />
+            app:layout_constraintStart_toStartOf="@+id/etName" />
 
         <EditText
             android:id="@+id/etAge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
             android:ems="10"
             android:enabled="false"
             android:hint="Edad"
@@ -69,25 +84,15 @@
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
+            app:layout_constraintBottom_toTopOf="@+id/switchEditar"
             app:layout_constraintEnd_toEndOf="@+id/etName"
-            app:layout_constraintStart_toStartOf="@+id/etName"
-            app:layout_constraintTop_toBottomOf="@+id/etPhone" />
-
-        <ImageView
-            android:id="@+id/ivProfile"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_marginTop="32dp"
-            android:src="@drawable/andy"
-            app:layout_constraintEnd_toStartOf="@+id/guideline11"
-            app:layout_constraintStart_toStartOf="@+id/guideline10"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toStartOf="@+id/etName" />
 
         <TextView
             android:id="@+id/textView7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="34dp"
+            android:layout_marginBottom="30dp"
             android:text="Fecha de inicio: "
             android:textColor="@color/white"
             android:textSize="24sp"
@@ -116,11 +121,12 @@
             android:id="@+id/tvEstado"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="32dp"
+            android:layout_marginBottom="50dp"
             android:text="PAGADO"
             android:textSize="32sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline11"
+            app:layout_constraintHorizontal_bias="0.544"
             app:layout_constraintStart_toStartOf="@+id/guideline10" />
 
         <TextView
@@ -157,12 +163,11 @@
             android:id="@+id/switchEditar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="88dp"
-            android:text="editar"
+            android:layout_marginBottom="40dp"
+            android:text="pulsa para editar"
+            app:layout_constraintBottom_toTopOf="@+id/textView7"
             app:layout_constraintEnd_toStartOf="@+id/guideline11"
-            app:layout_constraintHorizontal_bias="0.472"
-            app:layout_constraintStart_toStartOf="@+id/guideline10"
-            app:layout_constraintTop_toBottomOf="@+id/etAge" />
+            app:layout_constraintStart_toStartOf="@+id/guideline10" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

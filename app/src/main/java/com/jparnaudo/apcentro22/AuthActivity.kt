@@ -1,29 +1,41 @@
 package com.jparnaudo.apcentro22
 
+import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.text.TextUtils
 import android.view.View
+import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.common.api.Api
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.jparnaudo.apcentro22.login.ForgotPasswordActivity
 import kotlinx.android.synthetic.main.activity_auth.*
-import java.security.Provider
+import kotlin.properties.Delegates
 
 class AuthActivity : AppCompatActivity() {
-
+    private lateinit var txtEmail: EditText
+    private lateinit var txtPassword: EditText
+    private lateinit var progressBar: ProgressDialog
+    private lateinit var databaseReference: DatabaseReference
+    private lateinit var database: FirebaseDatabase
+    private lateinit var auth: FirebaseAuth
     private val GOOGLE_SIGN_IN = 100
-
+    private var email by Delegates.notNull<String>()
+    private var password by Delegates.notNull<String>()
+    val usuario = FirebaseAuth.getInstance().currentUser
     override fun onCreate(savedInstanceState: Bundle?) {
 // Duermo la app por 1500 milisegundos para que se vea el Splash
         Thread.sleep(1500)
@@ -32,7 +44,9 @@ class AuthActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auth)
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
+
+
 // Agregar analytics de google
         val analytics = FirebaseAnalytics.getInstance(this)
         val bundle = Bundle()
@@ -41,11 +55,27 @@ class AuthActivity : AppCompatActivity() {
         //Setup
         setup()
         session()
+        initialise()
 
         forgotPasswordButton.setOnClickListener {
             goToActivity<ForgotPasswordActivity>()
             overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
         }
+    }
+
+    private fun initialise() {
+        //llamamos nuestras vista
+        txtEmail = findViewById(R.id.metEmail)
+        txtPassword = findViewById(R.id.metPassword)
+        progressBar = ProgressDialog(this)
+
+/*Creamos una instancia para guardar los datos del usuario en nuestra base  de datos*/
+        database = FirebaseDatabase.getInstance()
+/*Creamos una instancia para crear nuestra autenticación y guardar el usuario*/
+        auth = FirebaseAuth.getInstance()
+
+/*reference nosotros leemos o escribimos en una ubicación específica la base de datos*/
+        databaseReference = database.reference.child("Users")
     }
 
     override fun onStart() {
@@ -57,23 +87,81 @@ class AuthActivity : AppCompatActivity() {
         val prefs = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
         val email = prefs.getString("email", null)
         val provider = prefs.getString("provider", null)
-        if (email != null && provider != null) {
+        if (email != null && provider != null != null) {
             authLayout.visibility = View.INVISIBLE
-            showHome(email, ProviderType.valueOf(provider))
+            updateUserInfoAndGoHome()
         }
+    }
+    private fun createNewAccount() {
 
+        //Obtenemos los datos de nuestras cajas de texto
+//        firstName = txtName.text.toString()
+//        lastName = txtLastName.text.toString()
+        email = txtEmail.text.toString()
+        password = txtPassword.text.toString()
+
+//Verificamos que los campos estén llenos
+        if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)) {
+
+/*Antes de iniciar nuestro registro bloqueamos la pantalla o también podemos usar una barra de proceso por lo que progressbar está obsoleto*/
+
+            progressBar.setMessage("Usuario registrado...")
+            progressBar.show()
+
+//vamos a dar de alta el usuario con el correo y la contraseña
+            auth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this) {
+
+//Si está en este método quiere decir que todo salio bien en la autenticación
+
+/*Una vez que se dio de alta la cuenta vamos a dar de alta la información en la base de datos*/
+
+/*Vamos a obtener el id del usuario con que accedio con currentUser*/
+                    val user:FirebaseUser = auth.currentUser!!
+/*Damos de alta la información del usuario enviamos el la referencia para guardarlo en la base de datos  de preferencia enviamos el id para que no se repita*/
+                    val currentUserDb = databaseReference.child(user.uid)
+//Agregamos el nombre y el apellido dentro de user/id/
+//                    currentUserDb.child("firstName").setValue(firstName)
+//                    currentUserDb.child("lastName").setValue(lastName)
+                    currentUserDb.child("Email").setValue(email)
+//Por último nos vamos a la vista home
+                    updateUserInfoAndGoHome()
+
+                }.addOnFailureListener{
+// si el registro falla se mostrara este mensaje
+                    Toast.makeText(this, "Error en la autenticación.",
+                        Toast.LENGTH_SHORT).show()
+                }
+
+        } else {
+            Toast.makeText(this, "Llene todos los campos", Toast.LENGTH_SHORT).show()
+        }
     }
 
 
+    private fun updateUserInfoAndGoHome() {
+        //Nos vamos a la actividad home
+        val intent = Intent(this, HomeActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        startActivity(intent)
+//ocultamos el progress
+        progressBar.hide()
+
+    }
     private fun setup() {
         title = "Autenticación"
         signInButton.setOnClickListener {
             if (metEmail.text.isNotEmpty() && metPassword.text.isNotEmpty()) {
-                FirebaseAuth.getInstance().createUserWithEmailAndPassword(
+                progressBar.setMessage("Usuario registrado...")
+                progressBar.show()
+                auth.createUserWithEmailAndPassword(
                     metEmail.text.toString(), metPassword.text.toString()
                 ).addOnCompleteListener {
                     if (it.isSuccessful) {
-                        showHome(it.result?.user?.email ?: "", ProviderType.BASIC)
+                        val user:FirebaseUser = auth.currentUser!!
+                        val currentUserDb = databaseReference.child(user.uid)
+                        currentUserDb.child("Email").setValue(txtEmail.text.toString())
+                       updateUserInfoAndGoHome()
 
                     } else {
                         showAlert()
@@ -88,16 +176,16 @@ class AuthActivity : AppCompatActivity() {
                     metEmail.text.toString(), metPassword.text.toString()
                 ).addOnCompleteListener {
                     if (it.isSuccessful) {
-                        showHome(it.result?.user?.email ?: "", ProviderType.BASIC)
+                        metEmail.setText("")
+                        metPassword.setText("")
+                        updateUserInfoAndGoHome()
 
                     } else {
                         showAlert()
                     }
                 }
             }
-
         }
-
         googleButton.setOnClickListener {
             // Configuración
             val googleConf = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -105,22 +193,22 @@ class AuthActivity : AppCompatActivity() {
                 .requestEmail()
                 .build()
 
-            val user = FirebaseAuth.getInstance().currentUser
-            user?.let {
-                // Name, email address, and profile photo Url
-                val name = user.displayName
-                val phone = user.phoneNumber
-                val email = user.email
-                val photoUrl = user.photoUrl
-            }
 
             val googleClient = GoogleSignIn.getClient(this, googleConf)
             googleClient.signOut()
             startActivityForResult(googleClient.signInIntent, GOOGLE_SIGN_IN)
 
-
+            metEmail.setText("")
+            metPassword.setText("")
+            if (usuario != null) {
+                val user: FirebaseUser = auth.currentUser!!
+                val currentUserDb = databaseReference.child(user.uid)
+                currentUserDb.child("Email").setValue(user.email.toString())
+                currentUserDb.child("Name").setValue(user.displayName.toString())
+            }
         }
     }
+
 
     private fun showAlert() {
         val builder = AlertDialog.Builder(this)
@@ -131,13 +219,15 @@ class AuthActivity : AppCompatActivity() {
         dialog.show()
     }
 
-    private fun showHome(email: String, provider: ProviderType) {
-        val homeIntent = Intent(this, HomeActivity::class.java).apply {
-            putExtra("email", email)
-            putExtra("provider", provider.name)
-        }
-        startActivity(homeIntent)
-    }
+//    private fun showHome(email: String, provider: ProviderType, nombre: String) {
+//
+//        val homeIntent = Intent(this, HomeActivity::class.java).apply {
+//            putExtra("email", email)
+//            putExtra("provider", provider.name)
+//            putExtra("nombre", nombre)
+//        }
+//        startActivity(homeIntent)
+//    }
 
     private var doubleBackToExitPressedOnce = false
     override fun onBackPressed() {
@@ -163,8 +253,7 @@ class AuthActivity : AppCompatActivity() {
                     FirebaseAuth.getInstance().signInWithCredential(credential)
                         .addOnCompleteListener {
                             if (it.isSuccessful) {
-                                showHome(account.email ?: "", ProviderType.GOOGLE)
-
+                                updateUserInfoAndGoHome()
                             } else {
                                 showAlert()
                             }
